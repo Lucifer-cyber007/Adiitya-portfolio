@@ -1,0 +1,19 @@
+# System Files
+.DS_Store
+Thumbs.db
+
+# Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Temporary Files
+*.tmp
+~*
+
+# Setup Guide (optional - remove if you want to keep it)
+CONTACT_FORM_SETUP.md

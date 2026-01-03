@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Aditya Sharma - AI Engineer & Full Stack Developer. Passionate about building innovative AI solutions and full-stack applications.">
+    <meta name="keywords"
+        content="Aditya Sharma, AI Engineer, Full Stack Developer, Machine Learning, Python, React, Portfolio">
+    <meta name="author" content="Aditya Sharma">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Aditya Sharma | AI Engineer & Developer">
+    <meta property="og:description"
+        content="Building intelligent systems and innovative solutions with AI/ML and full-stack development.">
+    <meta property="og:type" content="website">
+
+    <title>Aditya Sharma | AI Engineer & Developer</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="opacity: 0; transition: opacity 0.5s ease;">
+
+    <!-- Starfield Background -->
+    <canvas id="starfield"></canvas>
+
+    <!-- Gradient Orbs -->
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">AS</a>
+
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-social">
+                <a href="https://github.com/lucifer-cyber007" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/aditya-sharma-291720257" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:adityapa2004@gmail.com" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home">
+        <div class="hero-content">
+            <p class="hero-greeting">Hello, I'm</p>
+            <h1 class="hero-title">ADITYA SHARMA</h1>
+            <p class="hero-subtitle">Building intelligent AI systems and innovative full-stack applications with
+                expertise in Machine Learning, Deep Learning, and modern web technologies.</p>
+
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">
+                    <i class="fas fa-code"></i> View Projects
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <i class="fas fa-envelope"></i> Get in Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-header">
+            <p class="section-label">About Me</p>
+            <h2 class="section-title">Who I Am</h2>
+            <p class="section-description">
+                Passionate about leveraging technology to create innovative solutions
+            </p>
+        </div>
+
+        <div class="about-grid">
+            <!-- Left Column: Bio & Education -->
+            <div class="about-content">
+                <h3>Career Objective</h3>
+                <p>
+                    To leverage technical skills and an analytical mindset in developing innovative solutions.
+                    I aim to continuously learn and contribute to organizational growth, applying creativity,
+                    problem-solving, and a passion for technology to deliver impactful results.
+                </p>
+
+                <h3>Education</h3>
+                <div class="education-timeline">
+                    <div class="education-item">
+                        <h4>Jyothy Institute of Technology</h4>
+                        <p class="degree">BE in Computer Science Engineering</p>
+                        <p class="duration">2022 – 2026</p>
+                        <p class="score">CGPA: 8.0 (6th semester completed)</p>
+                    </div>
+
+                    <div class="education-item">
+                        <h4>Sadhana PU College</h4>
+                        <p class="degree">Pre-University (Science)</p>
+                        <p class="duration">2020 – 2022</p>
+                        <p class="score">Percentage: 83%</p>
+                    </div>
+
+                    <div class="education-item">
+                        <h4>Swargarani School</h4>
+                        <p class="degree">Secondary Education</p>
+                        <p class="duration">2007 – 2020</p>
+                        <p class="score">10th Grade: 85.6%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Skills -->
+            <div class="about-content">
+                <h3>Technical Expertise</h3>
+
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>
+                            <i class="fas fa-code"></i>
+                            Programming Languages
+                        </h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">C</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>
+                            <i class="fas fa-tools"></i>
+                            Technologies & Tools
+                        </h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">PyTorch</span>
+                            <span class="skill-tag">OpenCV</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">FastAPI</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">GitHub</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="section-header">
+            <p class="section-label">Featured Projects</p>
+            <h2 class="section-title">My Work</h2>
+            <p class="section-description">
+                Explore my latest projects combining AI, machine learning, and full-stack development
+            </p>
+        </div>
+
+        <!-- Project Filters -->
+        <div class="project-filters">
+            <button class="filter-btn active" data-filter="all">ALL</button>
+            <button class="filter-btn" data-filter="ai">AI/ML</button>
+            <button class="filter-btn" data-filter="web">WEB</button>
+            <button class="filter-btn" data-filter="data">DATA</button>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+            <!-- Project 1: Hear2See -->
+            <div class="project-card" data-category="ai">
+                <h3>Hear2See</h3>
+                <p>
+                    AI system that converts audio input into dynamically generated video content using
+                    Stable Diffusion and advanced NLP techniques.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">PyTorch</span>
+                    <span class="tech-tag">Stable Diffusion</span>
+                    <span class="tech-tag">LoRA</span>
+                    <span class="tech-tag">Vosk ASR</span>
+                    <span class="tech-tag">FFmpeg</span>
+                    <span class="tech-tag">Gradio</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Lucifer-cyber007/HEAR_2_SEE" target="_blank" class="project-link">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 2: Deepfake Detection AI -->
+            <div class="project-card" data-category="ai">
+                <h3>Deepfake Detection AI</h3>
+                <p>
+                    AI-powered system for identifying manipulated frames in videos using EfficientNet
+                    and advanced computer vision techniques.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">PyTorch</span>
+                    <span class="tech-tag">FastAPI</span>
+                    <span class="tech-tag">React.js</span>
+                    <span class="tech-tag">OpenCV</span>
+                    <span class="tech-tag">EfficientNet</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Lucifer-cyber007/DEEPFAKE_DETCTION-AI" target="_blank"
+                        class="project-link">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 3: Mini ERP -->
+            <div class="project-card" data-category="web data">
+                <h3>Mini ERP - Sales & Inventory Management</h3>
+                <p>
+                    Production-ready ERP system with complete workflows for sales, inventory,
+                    and customer management.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">FastAPI</span>
+                    <span class="tech-tag">SQLAlchemy</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">React 18</span>
+                    <span class="tech-tag">Vite</span>
+                    <span class="tech-tag">Pydantic</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Lucifer-cyber007/MINI_ERP" target="_blank" class="project-link">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 4: CodeGen AI -->
+            <div class="project-card" data-category="ai web">
+                <h3>CodeGen AI - Intelligent Code Generation</h3>
+                <p>
+                    AI-powered code generation platform using fine-tuned Gemma 2B model with
+                    automated testing and validation.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">Gemma 2B</span>
+                    <span class="tech-tag">FastAPI</span>
+                    <span class="tech-tag">React 18</span>
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">Transformers</span>
+                    <span class="tech-tag">LoRA</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Lucifer-cyber007/codegen-ai" target="_blank" class="project-link">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 5: PDF Q&A Chatbot -->
+            <div class="project-card" data-category="ai">
+                <h3>PDF Question-Answering System</h3>
+                <p>
+                    RAG-based chatbot that answers questions from PDF documents using Groq's
+                    Llama 3.1 LLM and ChromaDB vector store.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">FastAPI</span>
+                    <span class="tech-tag">ChromaDB</span>
+                    <span class="tech-tag">Groq LLM</span>
+                    <span class="tech-tag">Sentence Transformers</span>
+                    <span class="tech-tag">PyPDF2</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Lucifer-cyber007/pdf-q-a-chatbot-" target="_blank" class="project-link">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 6: AmbedkarGPT -->
+            <div class="project-card" data-category="ai">
+                <h3>AmbedkarGPT - Local RAG System</h3>
+                <p>
+                    Offline RAG-based Q&A system focused on Dr. B.R. Ambedkar's speeches using
+                    LangChain and Ollama.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">LangChain</span>
+                    <span class="tech-tag">Ollama</span>
+                    <span class="tech-tag">ChromaDB</span>
+                    <span class="tech-tag">HuggingFace</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Lucifer-cyber007/AmbedkarGPT-Intern-Task" target="_blank"
+                        class="project-link">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 7: Ration Card Management -->
+            <div class="project-card" data-category="web data">
+                <h3>Ration Card Management System</h3>
+                <p>
+                    Database-driven system for secure and efficient ration card distribution
+                    and management.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">MySQL</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Lucifer-cyber007/RCM" target="_blank" class="project-link">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 8: Multilingual Chatbot -->
+            <div class="project-card" data-category="web ai">
+                <h3>Multilingual Chatbot</h3>
+                <p>
+                    Responsive chatbot application with real-time chat functionality and
+                    language switching capabilities.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Vite</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">CSS</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/Lucifer-cyber007/Multilingual-Chatbot" target="_blank"
+                        class="project-link">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="section-header">
+            <p class="section-label">Experience & Activities</p>
+            <h2 class="section-title">Professional Journey</h2>
+            <p class="section-description">
+                My professional experience and community involvement
+            </p>
+        </div>
+
+        <div class="experience-grid">
+            <!-- Work Experience -->
+            <div class="experience-card">
+                <h3>Software Intern</h3>
+                <p class="company">CIIRC (Center for Incubation, Innovation, Research and Consultancy)</p>
+                <p class="duration">April 2025 – September 2025</p>
+                <p>
+                    Developed AI models for translating ancient Sharada script into Devanagari,
+                    leveraging advanced OCR techniques and deep learning frameworks.
+                </p>
+                <ul>
+                    <li>Built script translation AI models using TensorFlow and OpenCV</li>
+                    <li>Implemented OCR pipelines in Google Colab for efficient processing</li>
+                    <li>Utilized Pandas and NumPy for data preprocessing and analysis</li>
+                </ul>
+            </div>
+
+            <!-- Clubs & Activities -->
+            <div class="experience-card">
+                <h3>Rotaract Club Member</h3>
+                <p class="company">Community Service & Leadership</p>
+                <p class="duration">Ongoing</p>
+                <p>
+                    Actively involved in social service initiatives, leadership programs,
+                    community-building activities, and charity events.
+                </p>
+                <ul>
+                    <li>Participated in community outreach and social welfare programs</li>
+                    <li>Developed leadership and teamwork skills through collaborative projects</li>
+                    <li>Organized and contributed to various charity and fundraising events</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-header">
+            <p class="section-label">Get In Touch</p>
+            <h2 class="section-title">Contact Me</h2>
+            <p class="section-description">
+                Let's connect and discuss how we can work together
+            </p>
+        </div>
+
+        <div class="contact-grid">
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="contact-item-content">
+                        <h4>Email</h4>
+                        <a href="mailto:adityapa2004@gmail.com">adityapa2004@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div class="contact-item-content">
+                        <h4>Phone</h4>
+                        <a href="tel:+919481306324">+91-9481306324</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <div class="contact-item-content">
+                        <h4>LinkedIn</h4>
+                        <a href="https://linkedin.com/in/aditya-sharma-291720257" target="_blank">
+                            linkedin.com/in/aditya-sharma-291720257
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <div class="contact-item-content">
+                        <h4>GitHub</h4>
+                        <a href="https://github.com/lucifer-cyber007" target="_blank">
+                            github.com/lucifer-cyber007
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="contact-item-content">
+                        <h4>Location</h4>
+                        <p>Bangalore, India</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-container">
+                <!-- Success Message (hidden by default) -->
+                <div id="form-success"
+                    style="display: none; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem; color: #10b981;">
+                    <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully.
+                </div>
+
+                <form id="contact-form" class="contact-form" action="https://formspree.io/f/xqeayaqv" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="_replyto" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <!-- Honeypot for spam protection -->
+                    <input type="text" name="_gotcha" style="display:none">
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-social">
+                <a href="https://github.com/lucifer-cyber007" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/aditya-sharma-291720257" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:adityapa2004@gmail.com" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            <p class="footer-text">
+                &copy; 2026 Aditya Sharma. Built with passion and code.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
