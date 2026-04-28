@@ -413,6 +413,71 @@ section {
 }
 
 /* ========================================
+   ACHIEVEMENTS SECTION
+   ======================================== */
+
+.achievements-grid {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.achievement-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    background:
+        linear-gradient(135deg, rgba(251, 191, 36, 0.14), rgba(245, 158, 11, 0.08) 45%, rgba(30, 41, 59, 0.35)),
+        var(--bg-card);
+    border: 1px solid rgba(251, 191, 36, 0.45);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.achievement-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 55%, #fde68a 100%);
+}
+
+.achievement-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(252, 211, 77, 0.8);
+    box-shadow: 0 24px 48px rgba(245, 158, 11, 0.22);
+}
+
+.achievement-icon {
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.45rem;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(251, 191, 36, 0.2));
+    border: 1px solid rgba(251, 191, 36, 0.45);
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.24);
+    flex-shrink: 0;
+}
+
+.achievement-content h3 {
+    font-size: 1.35rem;
+    margin-bottom: var(--spacing-xs);
+    color: #fde68a;
+}
+
+.achievement-content p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* ========================================
    ABOUT SECTION
    ======================================== */
 
@@ -631,6 +696,32 @@ section {
     margin-bottom: var(--spacing-sm);
 }
 
+.project-card.featured-project {
+    border-color: rgba(34, 211, 238, 0.65);
+    background:
+        linear-gradient(160deg, rgba(34, 211, 238, 0.12), rgba(59, 130, 246, 0.08) 45%, rgba(139, 92, 246, 0.1)),
+        var(--bg-card);
+    box-shadow: 0 18px 40px rgba(56, 189, 248, 0.2);
+}
+
+.project-card.featured-project h3 {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.project-card.featured-project h3::before {
+    content: 'FEATURED';
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    padding: 0.26rem 0.55rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(103, 232, 249, 0.35);
+    background: rgba(8, 145, 178, 0.22);
+    color: #67e8f9;
+    font-weight: 700;
+}
+
 .project-card p {
     color: var(--text-secondary);
     margin-bottom: var(--spacing-md);
@@ -689,6 +780,16 @@ section {
     border-color: rgba(59, 130, 246, 0.5);
     background: rgba(59, 130, 246, 0.22);
     transform: translateY(-2px);
+}
+
+.project-card.featured-project .project-link {
+    background: rgba(59, 130, 246, 0.24);
+    border-color: rgba(96, 165, 250, 0.46);
+}
+
+.project-card.featured-project .project-link:hover {
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.32), rgba(59, 130, 246, 0.34));
+    border-color: rgba(34, 211, 238, 0.58);
 }
 
 /* ========================================
@@ -944,6 +1045,12 @@ footer {
     }
 }
 
+@media (min-width: 1025px) {
+    .project-card.featured-project {
+        grid-column: span 2;
+    }
+}
+
 @media (max-width: 768px) {
     .nav-links {
         display: none;
@@ -968,6 +1075,10 @@ footer {
     
     .filter-btn {
         width: 100%;
+    }
+
+    .achievement-card {
+        flex-direction: column;
     }
 }
 
