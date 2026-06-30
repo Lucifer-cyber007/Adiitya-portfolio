@@ -22,63 +22,186 @@ document.addEventListener('DOMContentLoaded', function () {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Star particles
+    // ----- 3D Starfield -----
+    // Stars live in a 3D cube, rotate slowly around the Y axis, and are
+    // projected onto the 2D canvas with perspective. The whole field also
+    // parallax-tilts toward the mouse for an interactive depth effect.
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const stars = [];
-    const starCount = 200;
+    const starCount = window.innerWidth < 768 ? 180 : 340;
+    const SPREAD = 1000;          // half-size of the 3D cube
+    const FOCAL = 420;            // perspective focal length
+    const starColors = [
+        [255, 255, 255],
+        [240, 171, 252],   // light pink
+        [217, 70, 239],    // magenta
+        [168, 85, 247],    // violet
+    ];
 
-    class Star {
+    class Star3D {
         constructor() {
-            this.reset();
+            this.reset(true);
         }
 
-        reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2;
-            this.speedX = (Math.random() - 0.5) * 0.5;
-            this.speedY = (Math.random() - 0.5) * 0.5;
-            this.opacity = Math.random();
-            this.fadeSpeed = (Math.random() * 0.02) + 0.01;
-        }
-
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-
-            // Twinkle effect
-            this.opacity += this.fadeSpeed;
-            if (this.opacity >= 1 || this.opacity <= 0) {
-                this.fadeSpeed = -this.fadeSpeed;
-            }
-
-            // Wrap around screen
-            if (this.x < 0) this.x = canvas.width;
-            if (this.x > canvas.width) this.x = 0;
-            if (this.y < 0) this.y = canvas.height;
-            if (this.y > canvas.height) this.y = 0;
-        }
-
-        draw() {
-            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
+        reset(initial) {
+            this.x = (Math.random() - 0.5) * SPREAD * 2;
+            this.y = (Math.random() - 0.5) * SPREAD * 2;
+            this.z = initial ? (Math.random() - 0.5) * SPREAD * 2 : SPREAD;
+            this.radius = Math.random() * 1.6 + 0.4;
+            this.color = starColors[Math.floor(Math.random() * starColors.length)];
+            this.twinkle = Math.random() * Math.PI * 2;
         }
     }
 
-    // Initialize stars
     for (let i = 0; i < starCount; i++) {
-        stars.push(new Star());
+        stars.push(new Star3D());
     }
 
-    // Animation loop
+    // ----- 3D Wireframe Icosahedron (scroll-reactive) -----
+    // A 20-faced wireframe gem. Its rotation, position and scale are driven
+    // by how far down the page you've scrolled (with a gentle idle spin).
+
+    const PHI = (1 + Math.sqrt(5)) / 2;
+    const icoBase = [
+        [0, 1, PHI], [0, -1, PHI], [0, 1, -PHI], [0, -1, -PHI],
+        [1, PHI, 0], [-1, PHI, 0], [1, -PHI, 0], [-1, -PHI, 0],
+        [PHI, 0, 1], [-PHI, 0, 1], [PHI, 0, -1], [-PHI, 0, -1],
+    ];
+    const ICO_SCALE = window.innerWidth < 768 ? 120 : 200;
+    const icoVerts = icoBase.map(v => ({
+        x: v[0] * ICO_SCALE, y: v[1] * ICO_SCALE, z: v[2] * ICO_SCALE,
+    }));
+
+    // Edges = vertex pairs at the minimum (edge) distance
+    const icoEdges = [];
+    for (let i = 0; i < icoBase.length; i++) {
+        for (let j = i + 1; j < icoBase.length; j++) {
+            const dx = icoBase[i][0] - icoBase[j][0];
+            const dy = icoBase[i][1] - icoBase[j][1];
+            const dz = icoBase[i][2] - icoBase[j][2];
+            if (Math.abs(dx * dx + dy * dy + dz * dz - 4) < 0.01) {
+                icoEdges.push([i, j]);
+            }
+        }
+    }
+
+    const icoColor = [217, 70, 239];   // magenta edges
+    const icoGlow = [240, 171, 252];   // bright pink vertices
+    let scrollProgress = 0;
+
+    let angle = 0;
+    let targetTiltX = 0, targetTiltY = 0;
+    let tiltX = 0, tiltY = 0;
+
+    window.addEventListener('mousemove', function (e) {
+        targetTiltY = (e.clientX / window.innerWidth - 0.5) * 0.5;
+        targetTiltX = (e.clientY / window.innerHeight - 0.5) * 0.5;
+    });
+
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        stars.forEach(star => {
-            star.update();
-            star.draw();
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+
+        // Ease the rotation + mouse tilt
+        angle += reduceMotion ? 0 : 0.0012;
+        tiltX += (targetTiltX - tiltX) * 0.05;
+        tiltY += (targetTiltY - tiltY) * 0.05;
+
+        const sinY = Math.sin(angle + tiltY);
+        const cosY = Math.cos(angle + tiltY);
+        const sinX = Math.sin(tiltX);
+        const cosX = Math.cos(tiltX);
+
+        for (const s of stars) {
+            // Rotate around Y axis
+            let x = s.x * cosY - s.z * sinY;
+            let z = s.x * sinY + s.z * cosY;
+            // Rotate around X axis (mouse tilt)
+            let y = s.y * cosX - z * sinX;
+            z = s.y * sinX + z * cosX;
+
+            // Perspective projection
+            const scale = FOCAL / (FOCAL + z + SPREAD);
+            if (scale <= 0) continue;
+
+            const sx = cx + x * scale;
+            const sy = cy + y * scale;
+            if (sx < 0 || sx > canvas.width || sy < 0 || sy > canvas.height) continue;
+
+            s.twinkle += 0.03;
+            const depth = Math.max(0, Math.min(1, scale));
+            const alpha = (0.25 + 0.55 * depth) * (0.7 + 0.3 * Math.sin(s.twinkle));
+            const r = s.radius * scale * 1.8;
+            const [cr, cg, cb] = s.color;
+
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(${cr}, ${cg}, ${cb}, ${alpha})`;
+            ctx.arc(sx, sy, Math.max(0.3, r), 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // ----- Render the scroll-reactive icosahedron -----
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        const sp = Math.min(1, Math.max(0, window.pageYOffset / maxScroll));
+        scrollProgress += (sp - scrollProgress) * 0.08; // smooth follow
+
+        const now = performance.now();
+        // Rotation: mostly scroll-driven, with a slow idle spin
+        const rx = scrollProgress * Math.PI * 4 + (reduceMotion ? 0 : now * 0.00018);
+        const ry = scrollProgress * Math.PI * 6 + (reduceMotion ? 0 : now * 0.00026);
+        const cosRx = Math.cos(rx), sinRx = Math.sin(rx);
+        const cosRy = Math.cos(ry), sinRy = Math.sin(ry);
+
+        // Position drifts right -> left and waves vertically as you scroll
+        const offX = (0.3 - scrollProgress * 0.6) * canvas.width;
+        const offY = Math.sin(scrollProgress * Math.PI * 1.5) * canvas.height * 0.12;
+        const breathe = 1 + scrollProgress * 0.35; // grows a little on scroll
+
+        const ip = icoVerts.map(v => {
+            // rotate around X
+            let y = v.y * cosRx - v.z * sinRx;
+            let z = v.y * sinRx + v.z * cosRx;
+            let x = v.x;
+            // rotate around Y
+            const x2 = x * cosRy + z * sinRy;
+            const z2 = -x * sinRy + z * cosRy;
+            const scale = (FOCAL / (FOCAL + z2 + SPREAD)) * breathe;
+            return {
+                sx: cx + offX + x2 * scale,
+                sy: cy + offY + y * scale,
+                z: z2,
+            };
         });
+
+        const [ir, ig, ib] = icoColor;
+        ctx.lineWidth = 1.4;
+        for (const [a, b] of icoEdges) {
+            const pa = ip[a], pb = ip[b];
+            const depth = 0.5 + 0.5 * ((pa.z + pb.z) / 2 + SPREAD) / (SPREAD * 2);
+            ctx.strokeStyle = `rgba(${ir}, ${ig}, ${ib}, ${0.25 + 0.45 * depth})`;
+            ctx.shadowColor = `rgba(${ir}, ${ig}, ${ib}, 0.6)`;
+            ctx.shadowBlur = 6;
+            ctx.beginPath();
+            ctx.moveTo(pa.sx, pa.sy);
+            ctx.lineTo(pb.sx, pb.sy);
+            ctx.stroke();
+        }
+        ctx.shadowBlur = 0;
+
+        const [gr, gg, gb] = icoGlow;
+        for (const p of ip) {
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(${gr}, ${gg}, ${gb}, 0.9)`;
+            ctx.shadowColor = `rgba(${gr}, ${gg}, ${gb}, 0.9)`;
+            ctx.shadowBlur = 10;
+            ctx.arc(p.sx, p.sy, 2.6, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        ctx.shadowBlur = 0;
 
         requestAnimationFrame(animate);
     }
@@ -302,6 +425,41 @@ document.addEventListener('DOMContentLoaded', function () {
             orb.style.transform = `translate(${x}px, ${y}px)`;
         });
     });
+
+    // ========================================
+    // 3D TILT EFFECT ON CARDS
+    // ========================================
+
+    const supportsHover = window.matchMedia('(hover: hover)').matches;
+
+    if (supportsHover && !reduceMotion) {
+        const tiltCards = document.querySelectorAll(
+            '.project-card, .experience-card, .skill-category, .education-item, .achievement-card, .contact-item'
+        );
+
+        const MAX_TILT = 9; // degrees
+
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', function (e) {
+                const rect = card.getBoundingClientRect();
+                const px = (e.clientX - rect.left) / rect.width;
+                const py = (e.clientY - rect.top) / rect.height;
+
+                const rotateY = (px - 0.5) * (MAX_TILT * 2);
+                const rotateX = (0.5 - py) * (MAX_TILT * 2);
+
+                card.classList.add('tilt-active');
+                card.style.transform =
+                    `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale(1.015)`;
+            });
+
+            card.addEventListener('mouseleave', function () {
+                card.style.transform = '';
+                // Drop the fast transition after it settles so the CSS hover transition resumes
+                setTimeout(() => card.classList.remove('tilt-active'), 150);
+            });
+        });
+    }
 
     // ========================================
     // SCROLL TO TOP BUTTON
